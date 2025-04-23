@@ -1,257 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+	<title>Calendário</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
 
- <head>
-  <meta charset="UTF-8"/>
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
-  
-  <title>Calendário</title>
-  
-  <style>
-   * {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    box-sizing: border-box;
-   }
-   
-   body {
-    font-family: 'Robots', Sans-Serif;
-    min-height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #404040;
-    color: #EAEAEA;
-   }
-   
-   #calendar-box {
-    width: 28.125rem;
-    height: 24.44rem;
-    background-color: #000;
-    color: #EAEAEA;
-    border-radius: 0.625rem;
-   }
-   
-   #calendar-box header {
-    padding: 1.5625rem 1.875rem 0.625rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-   }
-   
-   #calendar-box header .current-date {
-    font-size: 1.5rem;
-    font-weight: 500;
-   }
-   
-   #calendar-box header .icons {
-    display: flex;
-    gap: 0.625rem;
-   }
-   
-   #calendar-box header .icons ion-icon {
-    font-size: 2rem;
-    width: 2rem;
-    height: 2rem;
-    color: #909090;
-    border-radius: 50%;
-    user-select: none;
-   }
-   
-   #calendar-box header .icons ion-icon:active {
-    background-color: #F2F2F2;
-   }
-   
-   #calendar-box .calendar {
-    padding: 1.25rem;
-   }
-   
-   #calendar-box .calendar ul {
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-   }
-   
-   #calendar-box .calendar li {
-    font-size: 1rem;
-    width: calc(100% / 7);
-    color: #D3D3D3;
-    user-select: none;
-   }
-   
-   #calendar-box .calendar .weeks li {
-    font-weight: 500;
-    cursor: default;
-   }
-   
-   #calendar-box .calendar .days {
-    margin-bottom:  1.25rem;
-   }
-   
-   #calendar-box .calendar .days li {
-    margin-top: 1.875rem;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-    z-index: 3;
-   }
-   
-   #calendar-box .calendar .days li.inactive {
-    color: #9E9E9E;
-   }
-   
-   #calendar-box .calendar .days li.active {
-    color: #FFF;
-   }
-   
-   #calendar-box .calendar .days li::before {
-    content: '';
-    width: 2.5rem;
-    height: 2.5rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    transition: all 0.3s ease-in-out;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-   }
-   
-   #calendar-box .calendar .days li.active::before {
-    background-color: #00FF7B;
-   }
-   
-   #calendar-box .calendar .days li:not(.active):active {
-    color: #000;
-   }
-   
-   #calendar-box .calendar .days li:not(.active):active::before {
-    background-color: #F2F2F2;
-   }
-  </style>
-  
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
- </head>
- 
- <body>
-  <div id="calendar-box">
-   <header>
-    <p class="current-date"></p>
-    
-    
-    <div class="icons">
-     <ion-icon name="arrow-back" id="previous"></ion-icon>
-     
-     <ion-icon name="arrow-forward" id="next"></ion-icon>
-    </div>
-   </header>
-   
-   
-   
-   <div class="calendar">
-    <ul class="weeks">
-     <li>DOM</li>
-     
-     <li>SEG</li>
-     
-     <li>TER</li>
-     
-     <li>QUA</li>
-     
-     <li>QUI</li>
-     
-     <li>SEX</li>
-     
-     <li>SÁB</li>
-    </ul>
-    
-    
-    <ul class="days"></ul>
-   </div>
-  </div>
-  
-  <script defer>
-   const currentDate = document.querySelector(".current-date"),
-         previousNextIcon = document.querySelectorAll(".icons ion-icon"),
-         daysTag = document.querySelector(".days");
-   
-   let date = new Date(),
-        currentYear = date.getFullYear(),
-        currentMonth = date.getMonth();
-   
-   const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro"
-    ]
-    
-    const renderCalendar = () => {
-     let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay(),
-         lastDateOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate(),
-         lastDayOfMonth = new Date(currentYear, currentMonth, lastDateOfMonth).getDay(),
-         lastDateOfLastMonth = new Date(currentYear, currentMonth, 0).getDate();
-     console.log(firstDayOfMonth);
-     console.log(lastDateOfMonth);
-     console.log(lastDayOfMonth);
-     console.log(lastDateOfLastMonth);
-     
-     let liTag = "";
-     
-     for (let i = firstDayOfMonth; i > 0; i--) {
-      liTag += `<li class="inactive">${lastDateOfLastMonth - i + 1}</li>`;
-     }
-     
-     for (let i = 1; i <= lastDateOfMonth; i++) {
-      let isToday = i === date.getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear() ? "active" : "";
-      
-      liTag += `<li class="${isToday}">${i}</li>`;
-     }
-     
-     for (let i = lastDayOfMonth; i < 6; i++) {
-      liTag += `<li class="inactive">${i - lastDayOfMonth + 1}</li>`;
-     }
-     
-     currentDate.innerText = `${months[currentMonth]} de ${currentYear}`;
-     
-     daysTag.innerHTML = liTag;
-    }
-    
-    renderCalendar();
-    
-    previousNextIcon.forEach((icon) => {
-     icon.addEventListener('click', () => {
-      currentMonth = icon.id === "previous" ? currentMonth - 1 : currentMonth + 1;
-      
-      if (currentMonth < 0 || currentMonth > 11) {
-       date = new Date(currentYear, currentMonth, new Date().getDate());
-       
-       currentYear = date.getFullYear();
-       
-       currentMonth = date.getMonth();
-      } else {
-       date = new Date();
-      }
-      
-      renderCalendar();
-     })
-    })
-  </script>
- </body>
+<body>
+	<div id="calendar-box">
+		<header>
+			<p class="current-date"></p>
+			<div class="icons">
+				<ion-icon name="arrow-back" id="previous"></ion-icon>
+				<ion-icon name="arrow-forward" id="next"></ion-icon>
+			</div>
+		</header>
+		
+		<div class="calendar">
+			<ul class="weeks">
+				<li>DOM</li>
+				<li>SEG</li>
+				<li>TER</li>
+				<li>QUA</li>
+				<li>QUI</li>
+				<li>SEX</li>
+				<li>SÁB</li>
+			</ul>
+			<ul class="days"></ul>
+		</div>
+	</div>
+	<script src="script.js" defer></script>
+</body>
 </html>
