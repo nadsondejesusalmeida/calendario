@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<base href="https://nadsondejesusalmeida.github.io/calendario" target="_blank" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+	<title>Calendário</title>
+	<link rel="stylesheet" href="../assets/styles/root.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="styles/style.css" type="text/css" media="all" />
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+	<header>
+		<button type="button">
+			<ion-icon name="sunny"></ion-icon>
+		</button>
+	</header>
+	<main>
+		<section id="calendar-box">
+			<header>
+				<p class="current-date"></p>
+				<div class="icons">
+					<ion-icon name="arrow-back" id="previous"></ion-icon>
+					<ion-icon name="arrow-forward" id="next"></ion-icon>
+				</div>
+			</header>
+			
+			<div class="calendar">
+				<ul class="weeks">
+					<li>DOM</li>
+					<li>SEG</li>
+					<li>TER</li>
+					<li>QUA</li>
+					<li>QUI</li>
+					<li>SEX</li>
+					<li>SÁB</li>
+				</ul>
+				<ul class="days"></ul>
+			</div>
+		</section>
+	</main>
+	<script src="scripts/script.js"></script>
+</body>
+</html>
