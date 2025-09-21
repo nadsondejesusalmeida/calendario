@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-	<base href="https://nadsondejesusalmeida.github.io/calendario" target="_blank" />
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
 	<title>Calendário</title>
-	<link rel="stylesheet" href="../assets/styles/root.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="https://nadsondejesusalmeida.github.io/assets/styles/root.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="styles/style.css" type="text/css" media="all" />
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
+	<button type="button" id="theme-color-button">
+		<ion-icon name="sunny" id="theme-color-icon"></ion-icon>
+	</button>
 	<header>
-		<button type="button">
-			<ion-icon name="sunny"></ion-icon>
-		</button>
+		<h1>Calendário</h1>
 	</header>
 	<main>
 		<section id="calendar-box">
@@ -42,6 +42,7 @@
 			</div>
 		</section>
 	</main>
+	<script src="https://nadsondejesusalmeida.github.io/assets/scripts/theme.js"></script>
 	<script src="scripts/script.js"></script>
 </body>
 </html>
