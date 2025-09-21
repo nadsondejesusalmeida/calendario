@@ -47,6 +47,11 @@ body > header h1 {
 
 main {
 	padding: 0 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
 }
 
 #calendar-box {
